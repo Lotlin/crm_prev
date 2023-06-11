@@ -413,17 +413,24 @@
 } 
 
 .add-good__error-img-wrapper {
-  margin-bottom: 33px;
-  padding-top: 109px;
+  position: relative;
 }
 
 .add-good__error-img {
+  position: absolute;
   display: block;
+  top: 119px;
+  left: 130px;
   width: 90px;
   height: 90px;
 }
+
 .add-good__error-title {
+  position: absolute;
+  top: 236px;
+  left: 48px;
   color: #6e6893;
+  letter-spacing: 1.8px;
   font-size: 18px;
   font-weight: 700;
   text-align: center;
