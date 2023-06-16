@@ -271,7 +271,7 @@
   background-size: contain;
 }
 
-.goods__table-button-cart {
+.goods__del {
   background: url(../img/cart.svg) no-repeat;
   background-size: contain;
 }
