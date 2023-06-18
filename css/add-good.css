@@ -219,6 +219,10 @@
   height: 40px;
 }
 
+.form__discount-input:disabled {
+  background-color: #eeeeee;
+}
+
 .form__label-description {
   grid-area: description;
 }

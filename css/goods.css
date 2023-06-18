@@ -191,10 +191,12 @@
 
 .goods__table-units {
   width: 67px;
+  text-align: center;
 }
 
 .goods__table-amount {
   width: 156px;
+  text-align: center;
 }
 
 .goods__table-price {

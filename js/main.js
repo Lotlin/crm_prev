@@ -1,21 +1,4 @@
 'use strict';
-const goods = document.querySelector('.goods');
-const addBtn = goods.querySelector('.goods__add-good-button');
-
-const addGoodModal = document.querySelector('.add-good');
-const closeAddGoodModal = addGoodModal.querySelector('.add-good__close-button');
-
-addBtn.addEventListener('click', () => {
-  addGoodModal.classList.add('add-good--visible');
-});
-
-closeAddGoodModal.addEventListener('click', () => {
-  addGoodModal.classList.remove('add-good--visible');
-});
-
-goods.addEventListener('click', () => {
-  addGoodModal.classList.remove('add-good--visible');
-}, true);
 
 const goodsArr = [
   {
@@ -73,71 +56,244 @@ const goodsArr = [
   },
 ];
 
-const parsingNestedObject = (obj) => {
-  const valArr = [];
-  const nestedValues = Object.values(obj);
-  for (const val of nestedValues) {
-    valArr.push(val);
-  }
-
-  return valArr;
+const goods = document.querySelector('.goods');
+const addGoodModal = document.querySelector('.add-good');
+const goodTotalPrice = addGoodModal.querySelector('.add-good__total-num');
+const addBtn = goods.querySelector('.goods__add-good-button');
+const closeAddGoodModal =
+addGoodModal.querySelector('.add-good__close-button');
+const mainTable = goods.querySelector('.goods__table');
+const form = addGoodModal.querySelector('.add-good__form');
+const {
+  discountCheckbox,
+  discountInput,
+  price: priceInput,
+  amount: amountInput,
+} = form;
+const elTotalPrice = goods.querySelector('.goods__total-num');
+const addNewGoodArr = (good, arr) => {
+  arr.push(good);
 };
 
-const createRow = (obj) => {
-  const elem = document.createElement('tr');
-  elem.classList.add('good');
-  const values = Object.values(obj);
-
-  for (let value of values) {
-    if (typeof value === 'object') {
-      value = parsingNestedObject(value);
-    }
-
-    elem.insertAdjacentHTML('beforeend', `<td>${value}</td>`);
-  }
-
-  elem.insertAdjacentHTML(
-      'beforeend',
-      `<td class="goods__table-edit goods__table-align-right">
-        <button class="goods__table-button goods__table-button-edit"></button>
-      </td>`,
-  );
-
-  elem.insertAdjacentHTML(
-      'beforeend',
-      `<td class="goods__table-cart goods__table-align-right">
-        <button class="goods__table-button goods__del"></button>
-      </td>`,
-  );
-
-  return elem;
-};
-
-const renderGoods = (arr, table) => {
-  arr.map((item) => {
-    const newRow = createRow(item);
-    table.appendChild(newRow);
-  });
-
-  return true;
-};
-
-
-const table = document.querySelector('.goods__table');
-renderGoods(goodsArr, table);
-
-table.addEventListener('click', e => {
-  const target = e.target;
-  if (target.closest('.goods__del')) {
-    target.closest('.good').remove();
-    const idDeleted = target.closest('.good').childNodes[0].innerText;
-
-    for (let i = 0; i < goodsArr.length; i++) {
-      if (String(goodsArr[i].id) === idDeleted) {
-        goodsArr.splice(i, 1);
+{
+  const mainPageControl = () => {
+    const parsingNestedObject = (obj) => {
+      const valArr = [];
+      const nestedValues = Object.values(obj);
+      for (const val of nestedValues) {
+        valArr.push(val);
       }
-    }
-  }
 
-  console.log(goodsArr);
-});
+      return valArr;
+    };
+
+    const createRow = (obj) => {
+      const elem = document.createElement('tr');
+      elem.classList.add('good');
+      const values = Object.values(obj);
+      const keys = Object.keys(obj);
+      let i = 0;
+
+      for (let value of values) {
+        if (typeof value === 'object') {
+          value = parsingNestedObject(value);
+        }
+        elem.insertAdjacentHTML(
+            'beforeend', `<td class="goods__table-${keys[i]}">${value}</td>`,
+        );
+        i++;
+      }
+
+      elem.insertAdjacentHTML(
+          'beforeend',
+          `<td class="goods__table-edit goods__table-align-right">
+            <button class="goods__table-button goods__table-button-edit">
+            </button>
+          </td>`,
+      );
+
+      elem.insertAdjacentHTML(
+          'beforeend',
+          `<td class="goods__table-cart goods__table-align-right">
+            <button class="goods__table-button goods__del"></button>
+          </td>`,
+      );
+
+      return elem;
+    };
+
+    const renderMainGoods = (arr) => {
+      arr.map((item) => {
+        const newRow = createRow(item);
+        mainTable.appendChild(newRow);
+      });
+    };
+
+    const getAllGoodsTotalPrice = () => {
+      const elementsGoodsPrices =
+        mainTable.querySelectorAll('.goods__table-total');
+      let totalPrice = 0;
+      elementsGoodsPrices.forEach(element => {
+        totalPrice += Number(element.textContent);
+      });
+
+      elTotalPrice.textContent = `${totalPrice} руб.`;
+    };
+
+    const delGood = () => {
+      mainTable.addEventListener('click', e => {
+        const target = e.target;
+        if (target.closest('.goods__del')) {
+          target.closest('.good').remove();
+          const idDeleted = target.closest('.good').childNodes[0].innerText;
+          for (let i = 0; i < goodsArr.length; i++) {
+            if (String(goodsArr[i].id) === idDeleted) {
+              goodsArr.splice(i, 1);
+            }
+          }
+          getAllGoodsTotalPrice();
+          console.log(goodsArr);
+        }
+      });
+    };
+
+    return {
+      renderMainGoods,
+      delGood,
+      getAllGoodsTotalPrice,
+    };
+  };
+
+  const addGoodModalControl = () => {
+    const addGoodModalOpen = () => {
+      addGoodModal.classList.add('add-good--visible');
+      goodTotalPrice.textContent = `0 руб`;
+    };
+
+    const addGoodModalClose = () => {
+      addGoodModal.classList.remove('add-good--visible');
+    };
+
+    addBtn.addEventListener('click', addGoodModalOpen);
+    goods.addEventListener('click', addGoodModalClose, true);
+    closeAddGoodModal.addEventListener('click', addGoodModalClose);
+
+    const addGoodControl = () => {
+      const getDiscountSize = (fullPrice, discount) =>
+        Number(fullPrice) * Number(discount) * 0.01;
+      const getDiscountedPrice = (fullPrice, discountSize) =>
+        Number(fullPrice) - discountSize;
+      const getTotalPrcice = (price, amount) => price * Number(amount);
+
+      const createNewGood = (newGoodData) => {
+        const id = Date.parse(new Date());
+        const title = newGoodData.title;
+        const category = newGoodData.category;
+        const units = newGoodData.units;
+        const amount = newGoodData.amount;
+        const fullPrice = newGoodData.price;
+        const discountSize =
+          getDiscountSize(fullPrice, newGoodData.discountInput);
+        const price = getDiscountedPrice(fullPrice, discountSize);
+        const total = getTotalPrcice(price, amount);
+        const images = newGoodData.images;
+        const newGood = {
+          id, title, category, units, amount, price, total, images,
+        };
+
+        return newGood;
+      };
+
+      const showTotalPrice = () => {
+        const watchedElements =
+          [priceInput.name, amountInput.name, discountInput.name];
+
+        form.addEventListener('change', e => {
+          if (watchedElements.includes(e.target.name)) {
+            const discountSize =
+              getDiscountSize(priceInput.value, discountInput.value);
+            const discountedPrice =
+              getDiscountedPrice(priceInput.value, discountSize);
+            const totalPrice =
+              getTotalPrcice(discountedPrice, amountInput.value);
+            goodTotalPrice.textContent = `${totalPrice} руб`;
+          }
+        });
+      };
+
+      return {
+        createNewGood,
+        showTotalPrice,
+      };
+    };
+
+    const formAddGoodsControl =
+    (createNewGood, renderMainGoods, getAllGoodsTotalPrice) => {
+      form.addEventListener('submit', e => {
+        e.preventDefault();
+
+        const formData = new FormData(e.target);
+        const newGoodData = Object.fromEntries(formData);
+
+        const newGood = createNewGood(newGoodData);
+
+        const addNewGoodMainTable = () => {
+          const newGoodArr = [newGood];
+          renderMainGoods(newGoodArr);
+          getAllGoodsTotalPrice();
+        };
+
+        addNewGoodArr(newGood, goodsArr);
+        addNewGoodMainTable();
+        addGoodModalClose(),
+        form.reset();
+      });
+    };
+
+    const discountInputControl = () => {
+      discountCheckbox.addEventListener('change', () => {
+        if (discountCheckbox.checked) {
+          discountInput.removeAttribute('disabled');
+        } else {
+          discountInput.setAttribute('disabled', '');
+          discountInput.value = '';
+        }
+      });
+    };
+
+    return {
+      addGoodModalOpen,
+      addGoodModalClose,
+      addGoodControl,
+      createNewGood: addGoodControl().createNewGood,
+      showTotalPrice: addGoodControl().showTotalPrice,
+      formAddGoodsControl,
+      discountInputControl,
+    };
+  };
+
+
+  const init = () => {
+    const {
+      createNewGood,
+      showTotalPrice,
+      formAddGoodsControl,
+      discountInputControl,
+    } = addGoodModalControl();
+
+    const {
+      renderMainGoods,
+      delGood,
+      getAllGoodsTotalPrice,
+    } = mainPageControl();
+
+    delGood();
+    renderMainGoods(goodsArr);
+    formAddGoodsControl(createNewGood, renderMainGoods, getAllGoodsTotalPrice);
+    discountInputControl();
+    getAllGoodsTotalPrice();
+    showTotalPrice();
+  };
+
+  window.goodsInit = init;
+}
