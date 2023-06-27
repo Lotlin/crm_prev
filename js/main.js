@@ -6,8 +6,10 @@ import {
   createNewGood,
   showNewGoodTotalPrice,
 } from './modules/serviceCRM.js';
-import {addGoodModalControl, discountInputControl, formAddGoodsControl}
+import {addGoodModalControl, discountInputControl,
+  formAddGoodsControl, showGoodPicture}
   from './modules/control.js';
+import {mainTable} from './modules/getElements.js';
 
 {
   const init = () => {
@@ -19,6 +21,7 @@ import {addGoodModalControl, discountInputControl, formAddGoodsControl}
     discountInputControl();
     formAddGoodsControl(
         createNewGood, renderMainGoods, showAllGoodsTotalPrice);
+    showGoodPicture(mainTable, 600, 600);
   };
 
   window.goodsInit = init;

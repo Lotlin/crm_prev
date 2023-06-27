@@ -11,10 +11,19 @@ const renderRow = (obj) => {
   for (let value of values) {
     if (typeof value === 'object') {
       value = parsingNestedObject(value);
+      elem.insertAdjacentHTML(
+          'beforeend',
+          `<td class="goods__table-img goods__table-align-right">
+            <button class="goods__table-button goods__table-button-no-img 
+              goods__picture" data-pic="${value[0]}">
+              </button>
+          </td>`,
+      );
+    } else {
+      elem.insertAdjacentHTML(
+          'beforeend', `<td class="goods__table-${keys[i]}">${value}</td>`,
+      );
     }
-    elem.insertAdjacentHTML(
-        'beforeend', `<td class="goods__table-${keys[i]}">${value}</td>`,
-    );
     i++;
   }
 

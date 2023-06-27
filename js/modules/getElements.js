@@ -15,7 +15,6 @@ export const {
 } = form;
 export const elTotalPrice = goods.querySelector('.goods__total-num');
 
-
 export const getElementsGoodsPrices = () => {
   const elementsGoodsPrices =
   mainTable.querySelectorAll('.goods__table-total');

@@ -8,8 +8,7 @@ export const goodsArr = [
     'price': 300,
     'total': 1500,
     'images': {
-      'small': 'img/smrtxiaomi11t-m.jpg',
-      'big': 'img/smrtxiaomi11t-b.jpg',
+      'small': '/img/goods/dishwasher.jpg',
     },
   },
   {
@@ -22,7 +21,7 @@ export const goodsArr = [
     'price': 100,
     'total': 300,
     'images': {
-      'small': 'img/smrtxiaomi11t-m.jpg',
+      'small': '/img/goods/oven.jpg',
       'big': 'img/smrtxiaomi11t-b.jpg',
     },
   },
@@ -37,7 +36,7 @@ export const goodsArr = [
     'price': 10,
     'total': 700,
     'images': {
-      'small': 'img/smrtxiaomi11t-m.jpg',
+      'small': '/img/goods/refregerator.jpg',
     },
   },
   {
@@ -49,7 +48,7 @@ export const goodsArr = [
     'price': 300,
     'total': 1500,
     'images': {
-      'small': 'img/smrtxiaomi11t-m.jpg',
+      'small': '/img/goods/wasjing_machine.jpg',
     },
   },
 ];

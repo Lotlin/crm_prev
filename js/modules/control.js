@@ -9,7 +9,7 @@ import {
   goodTotalPrice,
 } from './getElements.js';
 import {goodsArr} from './data.js';
-import {addNewGoodArr} from './utils.js';
+import {addNewGoodArr, getPictureWindowPosition} from './utils.js';
 
 const addGoodModalOpen = () => {
   addGoodModal.classList.add('add-good--visible');
@@ -59,4 +59,19 @@ export const addGoodModalControl = () => {
   addBtn.addEventListener('click', addGoodModalOpen);
   goods.addEventListener('click', addGoodModalClose, true);
   closeAddGoodModal.addEventListener('click', addGoodModalClose);
+};
+
+export const showGoodPicture = (mainTable, pictureWidth, pictureHeigth) => {
+  mainTable.addEventListener('click', e => {
+    const target = e.target;
+    if (target.hasAttribute('data-pic')) {
+      const link = target.getAttribute('data-pic');
+      const picturePosition =
+        getPictureWindowPosition(pictureWidth, pictureHeigth);
+      open(`${link}`, '',
+          `popup ${picturePosition},
+          width=${pictureWidth}, height=${pictureHeigth}`,
+      );
+    }
+  });
 };
