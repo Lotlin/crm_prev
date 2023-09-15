@@ -45,6 +45,7 @@
         <div class="goods__table-wrapper">
           <table class="goods__table">
             <thead class="goods__table-head">
+              <!--
               <th class="goods__table-id">ID</th>
               <th class="goods__table-name">Наименование</th>
               <th class="goods__table-category">Категория</th>
@@ -55,6 +56,18 @@
               <th class="goods__table-img goods__table-align-right"></th>
               <th class="goods__table-edit goods__table-align-right"></th>
               <th class="goods__table-cart goods__table-align-right"></th>
+              -->
+              <th class="goods__table-th item goods__table-id">ID</th>
+              <th class="goods__table-th goods__table-name">Наименование</th>
+              <th class="goods__table-th goods__table-price">Цена</th>
+              <th class="goods__table-th goods__table-description">Описание</th>
+              <th class="goods__table-th goods__table-category">Категория</th>
+              <th class="goods__table-th goods__table-discount">Скидка</th>
+              <th class="goods__table-th goods__table-amount">Количество</th>
+              <th class="goods__table-th goods__table-units">Eд/изм</th>
+              <th class="goods__table-th goods__table-img"></th>
+              <th class="goods__table-th goods__table-edit"></th>
+              <th class="goods__table-th goods__table-cart"></th>
             </thead>
   
             <tbody>
@@ -68,123 +81,6 @@
                 <td class="goods__table-price goods__table-align-right">$100</td>
                 <td class="goods__table-total goods__table-align-right">$500</td>
                 <td class="goods__table-img goods__table-align-right"><button class="goods__table-button goods__table-button-no-img"></button></td>
-                <td class="goods__table-edit goods__table-align-right"><button class="goods__table-button goods__table-button-edit"></button></td>
-                <td class="goods__table-cart goods__table-align-right"><button class="goods__table-button goods__del"></button></td>
-              </tr>
-
-              <tr>
-                <td class="goods__table-id">937295527</td>
-                <td class="goods__table-name">Настольная игра “На 4-х ногах”</td>
-                <td class="goods__table-category">Настольные игры</td>
-                <td class="goods__table-units goods__table-align-center">шт</td>
-                <td class="goods__table-amount goods__table-align-center">12</td>
-                <td class="goods__table-price goods__table-align-right">$14</td>
-                <td class="goods__table-total goods__table-align-right">$168</td>
-                <td class="goods__table-img goods__table-align-right"><button class="goods__table-button goods__table-button-img"></button></td>
-                <td class="goods__table-edit goods__table-align-right"><button class="goods__table-button goods__table-button-edit"></button></td>
-                <td class="goods__table-cart goods__table-align-right"><button class="goods__table-button goods__del"></button></td>
-              </tr>
-
-              <tr>
-                <td class="goods__table-id">246016548</td>
-                <td class="goods__table-name">Навигационная система Soundmax</td>
-                <td class="goods__table-category">Техника для дома</td>
-                <td class="goods__table-units goods__table-align-center">шт</td>
-                <td class="goods__table-amount goods__table-align-center">5</td>
-                <td class="goods__table-price goods__table-align-right">$100</td>
-                <td class="goods__table-total goods__table-align-right">$500</td>
-                <td class="goods__table-img goods__table-align-right"><button class="goods__table-button goods__table-button-img"></button></td>
-                <td class="goods__table-edit goods__table-align-right"><button class="goods__table-button goods__table-button-edit"></button></td>
-                <td class="goods__table-cart goods__table-align-right"><button class="goods__table-button goods__del"></button></td>
-              </tr>
-  
-              <tr>
-                <td class="goods__table-id">246016548</td>
-                <td class="goods__table-name">Навигационная система Soundmax</td>
-                <td class="goods__table-category">Техника для дома</td>
-                <td class="goods__table-units goods__table-align-center">шт</td>
-                <td class="goods__table-amount goods__table-align-center">5</td>
-                <td class="goods__table-price goods__table-align-right">$100</td>
-                <td class="goods__table-total goods__table-align-right">$500</td>
-                <td class="goods__table-img goods__table-align-right"><button class="goods__table-button goods__table-button-img"></button></td>
-                <td class="goods__table-edit goods__table-align-right"><button class="goods__table-button goods__table-button-edit"></button></td>
-                <td class="goods__table-cart goods__table-align-right"><button class="goods__table-button goods__del"></button></td>
-              </tr>
-  
-              <tr>
-                <td class="goods__table-id">246016548</td>
-                <td class="goods__table-name">Навигационная система Soundmax</td>
-                <td class="goods__table-category">Техника для дома</td>
-                <td class="goods__table-units goods__table-align-center">шт</td>
-                <td class="goods__table-amount goods__table-align-center">5</td>
-                <td class="goods__table-price goods__table-align-right">$100</td>
-                <td class="goods__table-total goods__table-align-right">$500</td>
-                <td class="goods__table-img goods__table-align-right"><button class="goods__table-button goods__table-button-img"></button></td>
-                <td class="goods__table-edit goods__table-align-right"><button class="goods__table-button goods__table-button-edit"></button></td>
-                <td class="goods__table-cart goods__table-align-right"><button class="goods__table-button goods__del"></button></td>
-              </tr>
-
-              <tr>
-                <td class="goods__table-id">246016548</td>
-                <td class="goods__table-name">Навигационная система Soundmax</td>
-                <td class="goods__table-category">Техника для дома</td>
-                <td class="goods__table-units goods__table-align-center">шт</td>
-                <td class="goods__table-amount goods__table-align-center">5</td>
-                <td class="goods__table-price goods__table-align-right">$100</td>
-                <td class="goods__table-total goods__table-align-right">$500</td>
-                <td class="goods__table-img goods__table-align-right"><button class="goods__table-button goods__table-button-img"></button></td>
-                <td class="goods__table-edit goods__table-align-right"><button class="goods__table-button goods__table-button-edit"></button></td>
-                <td class="goods__table-cart goods__table-align-right"><button class="goods__table-button goods__del"></button></td>
-              </tr>
-  
-              <tr>
-                <td class="goods__table-id">246016548</td>
-                <td class="goods__table-name">Навигационная система Soundmax</td>
-                <td class="goods__table-category">Техника для дома</td>
-                <td class="goods__table-units goods__table-align-center">шт</td>
-                <td class="goods__table-amount goods__table-align-center">5</td>
-                <td class="goods__table-price goods__table-align-right">$100</td>
-                <td class="goods__table-total goods__table-align-right">$500</td>
-                <td class="goods__table-img goods__table-align-right"><button class="goods__table-button goods__table-button-img"></button></td>
-                <td class="goods__table-edit goods__table-align-right"><button class="goods__table-button goods__table-button-edit"></button></td>
-                <td class="goods__table-cart goods__table-align-right"><button class="goods__table-button goods__del"></button></td>
-              </tr>
-
-              <tr>
-                <td class="goods__table-id">246016548</td>
-                <td class="goods__table-name">Навигационная система Soundmax</td>
-                <td class="goods__table-category">Техника для дома</td>
-                <td class="goods__table-units goods__table-align-center">шт</td>
-                <td class="goods__table-amount goods__table-align-center">5</td>
-                <td class="goods__table-price goods__table-align-right">$100</td>
-                <td class="goods__table-total goods__table-align-right">$500</td>
-                <td class="goods__table-img goods__table-align-right"><button class="goods__table-button goods__table-button-img"></button></td>
-                <td class="goods__table-edit goods__table-align-right"><button class="goods__table-button goods__table-button-edit"></button></td>
-                <td class="goods__table-cart goods__table-align-right"><button class="goods__table-button goods__del"></button></td>
-              </tr>
-  
-              <tr>
-                <td class="goods__table-id">246016548</td>
-                <td class="goods__table-name">Навигационная система Soundmax</td>
-                <td class="goods__table-category">Техника для дома</td>
-                <td class="goods__table-units goods__table-align-center">шт</td>
-                <td class="goods__table-amount goods__table-align-center">5</td>
-                <td class="goods__table-price goods__table-align-right">$100</td>
-                <td class="goods__table-total goods__table-align-right">$500</td>
-                <td class="goods__table-img goods__table-align-right"><button class="goods__table-button goods__table-button-img"></button></td>
-                <td class="goods__table-edit goods__table-align-right"><button class="goods__table-button goods__table-button-edit"></button></td>
-                <td class="goods__table-cart goods__table-align-right"><button class="goods__table-button goods__del"></button></td>
-              </tr>
-
-              <tr>
-                <td class="goods__table-id">246016548</td>
-                <td class="goods__table-name">Навигационная система Soundmax</td>
-                <td class="goods__table-category">Техника для дома</td>
-                <td class="goods__table-units goods__table-align-center">шт</td>
-                <td class="goods__table-amount goods__table-align-center">5</td>
-                <td class="goods__table-price goods__table-align-right">$100</td>
-                <td class="goods__table-total goods__table-align-right">$500</td>
-                <td class="goods__table-img goods__table-align-right"><button class="goods__table-button goods__table-button-img"></button></td>
                 <td class="goods__table-edit goods__table-align-right"><button class="goods__table-button goods__table-button-edit"></button></td>
                 <td class="goods__table-cart goods__table-align-right"><button class="goods__table-button goods__del"></button></td>
               </tr>
@@ -355,12 +251,19 @@
         <button class="add-good__form-button" form="change-goodForm" type="submit" value="formButton">Добавить товар</button>
       </div>
     </div>
-
+<!--
     <div class="add-good__error">
       <button class="add-good__error-close-button"></button>
       <div class="add-good__error-img-wrapper"><img class="add-good__error-img" src="img/cross-red.svg" alt="красный крест"></div>
       <h2 class="add-good__error-title">Что-то пошло не так</h2>
     </div>
+    -->
+
+  </section>
+  <section class="error">
+    <button class="error__close-button"></button>
+    <img class="error__img" src="img/cross-red.svg" alt="красный крест">
+    <h2 class="error__title"></h2>
   </section>
 
 </body>

@@ -6,8 +6,11 @@ import {
   form, goodTotalPrice,
   mainTable,
   elTotalPrice,
+  errTitle,
 } from './getElements.js';
-import {goodsArr} from './data.js';
+
+import {errModalOpen} from './control.js';
+// import {goodsArr} from './data.js';
 
 const getDiscountSize = (fullPrice, discount) =>
   Number(fullPrice) * Number(discount) * 0.01;
@@ -32,6 +35,7 @@ export const delGood = () => {
     const target = e.target;
     if (target.closest('.goods__del')) {
       target.closest('.good').remove();
+      /*
       const idDeleted = target.closest('.good').childNodes[0].innerText;
       for (let i = 0; i < goodsArr.length; i++) {
         if (String(goodsArr[i].id) === idDeleted) {
@@ -40,6 +44,7 @@ export const delGood = () => {
       }
       showAllGoodsTotalPrice();
       console.log(goodsArr);
+      */
     }
   });
 };
@@ -69,16 +74,64 @@ export const createNewGood = (newGoodData) => {
   const title = newGoodData.title;
   const category = newGoodData.category;
   const units = newGoodData.units;
-  const amount = newGoodData.amount;
+  const count = newGoodData.amount;
   const fullPrice = newGoodData.price;
   const discountSize =
     getDiscountSize(fullPrice, newGoodData.discountInput);
   const price = getDiscountedPrice(fullPrice, discountSize);
-  const total = getTotalPrice(price, amount);
+  const description = newGoodData.description;
+  // total пока не выводится (изменена форма)
+  // const total = getTotalPrice(price, count);
   const images = newGoodData.images;
   const newGood = {
-    id, title, category, units, amount, price, total, images,
+    id, title, price, description, category, discountSize, count, units, images,
   };
 
   return newGood;
 };
+
+const showError = (err, data) => {
+  console.warn(err, data);
+  errModalOpen();
+  errTitle.textContent = `Ошибка ${err} ${data}`;
+};
+
+export const httpRequest = (url, {
+  method = 'GET',
+  callback,
+  body = {},
+  headers,
+}) => {
+  try {
+    const xhr = new XMLHttpRequest();
+    xhr.open(method, url);
+
+    if (headers) {
+      for (const [key, value] of Object.entries(headers)) {
+        xhr.setRequestHeader(key, value);
+      }
+    }
+
+    xhr.addEventListener('load', () => {
+      if (xhr.status < 200 || xhr.status >= 300) {
+        showError(new Error(xhr.status), xhr.response);
+        return;
+      }
+      // из url получаем объект, в котором нужно только свойство goods
+      const data = JSON.parse(xhr.response).goods;
+
+      if (callback) callback(data);
+    });
+
+    xhr.addEventListener('error', () => {
+      showError(new Error(xhr.status), xhr.response);
+      return;
+    });
+
+    xhr.send(JSON.stringify(body));
+  } catch (err) {
+    showError(new Error(err));
+  }
+};
+
+

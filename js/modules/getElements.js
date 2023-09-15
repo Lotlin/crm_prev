@@ -15,6 +15,10 @@ export const {
 } = form;
 export const elTotalPrice = goods.querySelector('.goods__total-num');
 
+export const errModal = document.querySelector('.error');
+export const errTitle = errModal.querySelector('.error__title');
+export const errCloseButton = errModal.querySelector('.error__close-button');
+
 export const getElementsGoodsPrices = () => {
   const elementsGoodsPrices =
   mainTable.querySelectorAll('.goods__table-total');

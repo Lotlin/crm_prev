@@ -177,6 +177,10 @@
   padding-left: 15px;
 }
 
+.goods__table-th {
+  text-align: center;
+}
+/*
 .goods__table-id {
   width: 93px;
 }
@@ -227,7 +231,7 @@
 .goods__table--align-right {
   text-align: right;
 }
-
+*/
 .goods__table-button {
   position: relative;
   width: 20px;

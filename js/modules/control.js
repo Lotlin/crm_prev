@@ -7,9 +7,13 @@ import {
   closeAddGoodModal,
   addGoodModal,
   goodTotalPrice,
+  errModal,
+  errCloseButton,
 } from './getElements.js';
-import {goodsArr} from './data.js';
-import {addNewGoodArr, getPictureWindowPosition} from './utils.js';
+// import {goodsArr} from './data.js';
+import {url} from './data.js';
+import {/* addNewGoodArr,*/ getPictureWindowPosition} from './utils.js';
+import {httpRequest} from './serviceCRM.js';
 
 const addGoodModalOpen = () => {
   addGoodModal.classList.add('add-good--visible');
@@ -22,7 +26,7 @@ const addGoodModalClose = () => {
 
 export const formAddGoodsControl =
   (createNewGood, renderMainGoods, showAllGoodsTotalPrice) => {
-    form.addEventListener('submit', e => {
+    form.addEventListener('submit', (e) => {
       e.preventDefault();
 
       const formData = new FormData(e.target);
@@ -36,10 +40,16 @@ export const formAddGoodsControl =
         showAllGoodsTotalPrice();
       };
 
-      addNewGoodArr(newGood, goodsArr);
+      httpRequest(url, {
+        method: 'POST',
+        body: newGood,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
       addNewGoodMainTable();
-      addGoodModalClose(),
-      form.reset();
+      addGoodModalClose();
     });
   };
 
@@ -73,5 +83,20 @@ export const showGoodPicture = (mainTable, pictureWidth, pictureHeigth) => {
           width=${pictureWidth}, height=${pictureHeigth}`,
       );
     }
+  });
+};
+
+export const errModalOpen = () => {
+  errModal.classList.add('error--visible');
+};
+
+
+export const errModalClose = () => {
+  errCloseButton.addEventListener('click', () => {
+    errModal.classList.remove('error--visible');
+  });
+
+  goods.addEventListener('click', () => {
+    errModal.classList.remove('error--visible');
   });
 };

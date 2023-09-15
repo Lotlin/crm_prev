@@ -1,3 +1,9 @@
+// получаем объект, из которого нужно только свойство goods
+// учтено в ф-и httpRequest
+export const url = 'http://localhost:3000/api/goods/';
+
+
+/*
 export const goodsArr = [
   {
     'id': 246016548,
@@ -52,3 +58,4 @@ export const goodsArr = [
     },
   },
 ];
+*/

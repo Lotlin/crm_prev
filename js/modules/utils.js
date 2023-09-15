@@ -7,11 +7,11 @@ export const parsingNestedObject = (obj) => {
 
   return valArr;
 };
-
+/*
 export const addNewGoodArr = (good, arr) => {
   arr.push(good);
 };
-
+*/
 const getScreenSize = () => {
   const screenHeight = screen.height;
   const screenWidth = screen.width;

@@ -1,19 +1,24 @@
 import {renderMainGoods} from './modules/render.js';
-import {goodsArr} from './modules/data.js';
+// import {goodsArr} from './modules/data.js';
+import {url} from './modules/data.js';
 import {
   delGood,
   showAllGoodsTotalPrice,
   createNewGood,
   showNewGoodTotalPrice,
+  httpRequest,
 } from './modules/serviceCRM.js';
 import {addGoodModalControl, discountInputControl,
-  formAddGoodsControl, showGoodPicture}
+  formAddGoodsControl, showGoodPicture, errModalClose}
   from './modules/control.js';
 import {mainTable} from './modules/getElements.js';
 
 {
   const init = () => {
-    renderMainGoods(goodsArr);
+    httpRequest(url, {
+      callback: renderMainGoods,
+    });
+    // renderMainGoods(goodsArr);
     delGood();
     showAllGoodsTotalPrice();
     showNewGoodTotalPrice();
@@ -22,6 +27,7 @@ import {mainTable} from './modules/getElements.js';
     formAddGoodsControl(
         createNewGood, renderMainGoods, showAllGoodsTotalPrice);
     showGoodPicture(mainTable, 600, 600);
+    errModalClose();
   };
 
   window.goodsInit = init;
