@@ -76,21 +76,27 @@ export const createNewGood = (newGoodData) => {
   const units = newGoodData.units;
   const count = newGoodData.amount;
   const fullPrice = newGoodData.price;
+  // discountSize пока не выводится (изменена форма)
   const discountSize =
     getDiscountSize(fullPrice, newGoodData.discountInput);
   const price = getDiscountedPrice(fullPrice, discountSize);
   const description = newGoodData.description;
   // total пока не выводится (изменена форма)
   // const total = getTotalPrice(price, count);
-  const images = newGoodData.images;
+  const image = newGoodData.images;
   const newGood = {
-    id, title, price, description, category, discountSize, count, units, images,
+    id, title, price, description, category, count, units, image,
   };
 
   return newGood;
 };
 
-const showError = (err, data) => {
+const showError = (err = '', data = '') => {
+  if (!err && !data) {
+    errModalOpen();
+    errTitle.textContent = `Что-то пошло не так...`;
+    return;
+  }
   console.warn(err, data);
   errModalOpen();
   errTitle.textContent = `Ошибка ${err} ${data}`;
@@ -124,7 +130,12 @@ export const httpRequest = (url, {
     });
 
     xhr.addEventListener('error', () => {
-      showError(new Error(xhr.status), xhr.response);
+      if (xhr.status === 422 || xhr.status === 404 ||
+        (xhr.status > 499 && xhr.status < 501)) {
+        showError(new Error(xhr.status), xhr.response);
+      } else {
+        showError();
+      }
       return;
     });
 
@@ -133,5 +144,3 @@ export const httpRequest = (url, {
     showError(new Error(err));
   }
 };
-
-

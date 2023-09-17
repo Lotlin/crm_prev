@@ -180,58 +180,10 @@
 .goods__table-th {
   text-align: center;
 }
-/*
-.goods__table-id {
-  width: 93px;
-}
-
-.goods__table-name {
-  width: 305px;
-}
-
-.goods__table-category {
-  width: 175px;
-}
-
-.goods__table-units {
-  width: 67px;
-  text-align: center;
-}
-
-.goods__table-amount {
-  width: 156px;
-  text-align: center;
-}
-
-.goods__table-price {
-  width: 95px;
-}
-
-.goods__table-total {
-  width: 95px;
-}
 
 .goods__table-img {
-  width: 35px;
-}
-
-.goods__table-edit {
-  width: 35px;
-}
-
-.goods__table-cart {
-  width: 55px;
-  padding-right: 20px;
-}
-
-.goods__table-align-center {
   text-align: center;
 }
-
-.goods__table--align-right {
-  text-align: right;
-}
-*/
 .goods__table-button {
   position: relative;
   width: 20px;

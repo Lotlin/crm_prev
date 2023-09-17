@@ -10,9 +10,8 @@ import {
   errModal,
   errCloseButton,
 } from './getElements.js';
-// import {goodsArr} from './data.js';
 import {url} from './data.js';
-import {/* addNewGoodArr,*/ getPictureWindowPosition} from './utils.js';
+import {getPictureWindowPosition} from './utils.js';
 import {httpRequest} from './serviceCRM.js';
 
 const addGoodModalOpen = () => {
@@ -36,7 +35,11 @@ export const formAddGoodsControl =
 
       const addNewGoodMainTable = () => {
         const newGoodArr = [newGood];
-        renderMainGoods(newGoodArr);
+        renderMainGoods(newGoodArr);/*
+        httpRequest(url, {
+          callback: renderMainGoods,
+        });
+        */
         showAllGoodsTotalPrice();
       };
 

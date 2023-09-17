@@ -1,5 +1,4 @@
 import {renderMainGoods} from './modules/render.js';
-// import {goodsArr} from './modules/data.js';
 import {url} from './modules/data.js';
 import {
   delGood,
@@ -15,14 +14,13 @@ import {mainTable} from './modules/getElements.js';
 
 {
   const init = () => {
+    addGoodModalControl();
     httpRequest(url, {
       callback: renderMainGoods,
     });
-    // renderMainGoods(goodsArr);
     delGood();
     showAllGoodsTotalPrice();
     showNewGoodTotalPrice();
-    addGoodModalControl();
     discountInputControl();
     formAddGoodsControl(
         createNewGood, renderMainGoods, showAllGoodsTotalPrice);
