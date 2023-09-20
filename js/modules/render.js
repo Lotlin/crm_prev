@@ -56,7 +56,9 @@ const renderRow = (obj) => {
           elem.insertAdjacentHTML('beforeend', string);
         } else {
           elem.insertAdjacentHTML('beforeend',
-              `<td class="goods__table-${keys[i]}">${obj[key]}</td>`,
+              `<td \
+                class="goods__table-${correctOrderOfProp[i]}">${obj[key]} \
+              </td>`,
           );
         }
       }

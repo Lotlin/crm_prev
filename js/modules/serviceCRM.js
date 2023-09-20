@@ -1,16 +1,17 @@
 import {
-  priceInput,
-  amountInput,
-  discountInput,
-  getElementsGoodsPrices,
-  form, goodTotalPrice,
+  // priceInput,
+  // amountInput,
+  // discountInput,
+  // getElementsGoodsPrices,
+  // form,
+  // goodTotalPrice,
   mainTable,
-  elTotalPrice,
+  // elTotalPrice,
   errTitle,
+  getModalElements,
 } from './getElements.js';
 
 import {errModalOpen} from './control.js';
-// import {goodsArr} from './data.js';
 
 const getDiscountSize = (fullPrice, discount) =>
   Number(fullPrice) * Number(discount) * 0.01;
@@ -18,16 +19,12 @@ const getDiscountSize = (fullPrice, discount) =>
 const getDiscountedPrice = (fullPrice, discountSize) =>
   Number(fullPrice) - discountSize;
 
-const getTotalPrice = (price, amount) => price * Number(amount);
+// const getTotalPrice = (price, amount) => price * Number(amount);
 
-export const showAllGoodsTotalPrice = () => {
-  let totalPrice = 0;
-  const elementsGoodsPrices = getElementsGoodsPrices();
-  elementsGoodsPrices.forEach(element => {
-    totalPrice += Number(element.textContent);
-  });
+export const showAllGoodsTotalPrice = async () => {
+  /* let totalPrice = 0;
 
-  elTotalPrice.textContent = `${totalPrice} руб.`;
+  elTotalPrice.textContent = `${totalPrice} руб.`; */
 };
 
 export const delGood = () => {
@@ -50,6 +47,11 @@ export const delGood = () => {
 };
 
 export const showNewGoodTotalPrice = () => {
+  const priceInput = getModalElements().price;
+  const amountInput = getModalElements().count;
+  const discountInput = getModalElements().discount;
+  const form = getModalElements().form;
+
   const watchedElements = [
     priceInput.name,
     amountInput.name,
@@ -58,13 +60,15 @@ export const showNewGoodTotalPrice = () => {
 
   form.addEventListener('change', e => {
     if (watchedElements.includes(e.target.name)) {
+      /*
       const discountSize =
         getDiscountSize(priceInput.value, discountInput.value);
       const discountedPrice =
         getDiscountedPrice(priceInput.value, discountSize);
       const totalPrice =
         getTotalPrice(discountedPrice, amountInput.value);
-      goodTotalPrice.textContent = `${totalPrice} руб`;
+        goodTotalPrice.textContent = `${totalPrice} руб`;
+      */
     }
   });
 };
@@ -90,6 +94,7 @@ export const createNewGood = (newGoodData) => {
 
   return newGood;
 };
+
 
 const showError = (err = '', data = '') => {
   if (!err && !data) {
@@ -117,16 +122,18 @@ export const httpRequest = (url, {
         xhr.setRequestHeader(key, value);
       }
     }
+    const loadElementsPromise = new Promise((resolve) => {
+      xhr.addEventListener('load', () => {
+        if (xhr.status < 200 || xhr.status >= 300) {
+          showError(new Error(xhr.status), xhr.response);
+          return;
+        }
+        // из url получаем объект, в котором нужно только свойство goods
+        const data = JSON.parse(xhr.response).goods;
 
-    xhr.addEventListener('load', () => {
-      if (xhr.status < 200 || xhr.status >= 300) {
-        showError(new Error(xhr.status), xhr.response);
-        return;
-      }
-      // из url получаем объект, в котором нужно только свойство goods
-      const data = JSON.parse(xhr.response).goods;
-
-      if (callback) callback(data);
+        if (callback) callback(data);
+        resolve();
+      });
     });
 
     xhr.addEventListener('error', () => {
@@ -140,7 +147,37 @@ export const httpRequest = (url, {
     });
 
     xhr.send(JSON.stringify(body));
+    loadElementsPromise;
   } catch (err) {
     showError(new Error(err));
+  }
+};
+
+export const fetchRequest = async (url, {
+  method = 'GET',
+  callback,
+  body,
+  headers,
+}) => {
+  try {
+    const options = {
+      method,
+    };
+
+    if (body) options.body = JSON.stringify(body);
+
+    if (headers) options.headers = headers;
+
+    const response = await fetch(url, options);
+
+    if (response.ok) {
+      const data = await response.json();
+      if (callback) callback(data);
+      return;
+    }
+
+    throw new Error(`Ошибка ${response.status}: ${response.statusText}`);
+  } catch (err) {
+    callback(new Error(err));
   }
 };

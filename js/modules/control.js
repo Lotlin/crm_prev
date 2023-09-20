@@ -1,30 +1,35 @@
 import {
-  form,
-  discountCheckbox,
-  discountInput,
+  // form,
+  // discountCheckbox,
+  // discountInput,
   addBtn,
   goods,
-  closeAddGoodModal,
-  addGoodModal,
-  goodTotalPrice,
+  // closeAddGoodModal,
+  // addGoodModal,
+  // goodTotalPrice,
   errModal,
   errCloseButton,
+  mainTable,
+  getModalElements,
 } from './getElements.js';
 import {url} from './data.js';
-import {getPictureWindowPosition} from './utils.js';
-import {httpRequest} from './serviceCRM.js';
+import {getPictureWindowPosition, getGoodId} from './utils.js';
+import {httpRequest, fetchRequest} from './serviceCRM.js';
+import {openModal, closeModal, fillModal} from './modal/modalContorl.js';
+import {getGoodDataUrl} from './data.js';
 
 const addGoodModalOpen = () => {
-  addGoodModal.classList.add('add-good--visible');
-  goodTotalPrice.textContent = `0 руб`;
+  // addGoodModal.classList.add('add-good--visible');
+  // goodTotalPrice.textContent = `0 руб`;
 };
 
 const addGoodModalClose = () => {
-  addGoodModal.classList.remove('add-good--visible');
+  // addGoodModal.classList.remove('add-good--visible');
 };
 
 export const formAddGoodsControl =
   (createNewGood, renderMainGoods, showAllGoodsTotalPrice) => {
+    const form = getModalElements().form;
     form.addEventListener('submit', (e) => {
       e.preventDefault();
 
@@ -35,11 +40,7 @@ export const formAddGoodsControl =
 
       const addNewGoodMainTable = () => {
         const newGoodArr = [newGood];
-        renderMainGoods(newGoodArr);/*
-        httpRequest(url, {
-          callback: renderMainGoods,
-        });
-        */
+        renderMainGoods(newGoodArr);
         showAllGoodsTotalPrice();
       };
 
@@ -57,7 +58,9 @@ export const formAddGoodsControl =
   };
 
 export const discountInputControl = () => {
+  const discountCheckbox = getModalElements().discountCheckbox;
   discountCheckbox.addEventListener('change', () => {
+    const discountInput = getModalElements().discount;
     if (discountCheckbox.checked) {
       discountInput.removeAttribute('disabled');
     } else {
@@ -71,7 +74,7 @@ export const discountInputControl = () => {
 export const addGoodModalControl = () => {
   addBtn.addEventListener('click', addGoodModalOpen);
   goods.addEventListener('click', addGoodModalClose, true);
-  closeAddGoodModal.addEventListener('click', addGoodModalClose);
+  // closeAddGoodModal.addEventListener('click', addGoodModalClose);
 };
 
 export const showGoodPicture = (mainTable, pictureWidth, pictureHeigth) => {
@@ -101,5 +104,20 @@ export const errModalClose = () => {
 
   goods.addEventListener('click', () => {
     errModal.classList.remove('error--visible');
+  });
+};
+
+export const editGoodModal = () => {
+  mainTable.addEventListener('click', e => {
+    const target = e.target;
+    if (target.closest('.goods__table-button-edit')) {
+      openModal('editGood');
+      closeModal();
+      const goodId = getGoodId(target, 'good');
+      const url = `${getGoodDataUrl}${goodId}`;
+      fetchRequest(url, {
+        callback: fillModal,
+      });
+    }
   });
 };

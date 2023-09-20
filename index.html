@@ -58,20 +58,20 @@
               <th class="goods__table-cart goods__table-align-right"></th>
               -->
               
-              <th class="goods__table-th item goods__table-id">ID</th>
-              <th class="goods__table-th goods__table-name">Наименование</th>
-              <th class="goods__table-th goods__table-price">Цена</th>
-              <th class="goods__table-th goods__table-description">Описание</th>
-              <th class="goods__table-th goods__table-category">Категория</th>
-              <th class="goods__table-amount goods__table-align-center">Количество</th>
-              <th class="goods__table-th goods__table-units">Eд/изм</th>
-              <th class="goods__table-th goods__table-img"></th>
-              <th class="goods__table-th goods__table-edit"></th>
-              <th class="goods__table-th goods__table-cart"></th>
+              <th class="goods__table-th">ID</th>
+              <th class="goods__table-th">Наименование</th>
+              <th class="goods__table-th">Цена</th>
+              <th class="goods__table-th">Описание</th>
+              <th class="goods__table-th">Категория</th>
+              <th class="goods__table-th">Количество</th>
+              <th class="goods__table-th ">Eд/изм</th>
+              <th class="goods__table-th"></th>
+              <th class="goods__table-th"></th>
+              <th class="goods__table-th"></th>
               
             </thead>
   
-            <tbody>
+            <tbody class="goods__table-body">
               <!--
               <tr>
                 <td class="goods__table-id">246016548</td>
@@ -109,11 +109,11 @@
       </div>
     </div>
   </section>
-
-  <section class="add-good">
+<!--
+  <div class="add-good1">
     <div class="modal-container">
       <h2 class="add-good__title">Добавить товар</h2>
-      <button class="add-good__close-button"></button>
+      <button class="add-good1__close-button"></button>
       <div class="add-good__line line"></div>
       <form class="add-good__form form" id="add-goodForm" action="#" method="post" enctype="multipart/form-data">
         <label class="form__label form__label-name" tabindex="0">
@@ -175,15 +175,10 @@
         <button class="add-good__form-button" form="add-goodForm" type="submit" value="formButton">Добавить товар</button>
       </div>
     </div>
-
-    <div class="add-good__error">
-      <button class="add-good__error-close-button"></button>
-      <div class="add-good__error-img-wrapper"><img class="add-good__error-img" src="img/cross-red.svg" alt="красный крест"></div>
-      <h2 class="add-good__error-title">Что-то пошло не так</h2>
-    </div>
-  </section>
-
-  <section class="change-good add-good">
+  </div>
+-->
+<!--
+  <div class="change-good add-good">
     <div class="modal-container">
       <div class="change-good__wrapper">
         <h2 class="add-good__title change-good-title">Изменить товар</h2>
@@ -252,15 +247,13 @@
         <button class="add-good__form-button" form="change-goodForm" type="submit" value="formButton">Добавить товар</button>
       </div>
     </div>
-<!--
     <div class="add-good__error">
       <button class="add-good__error-close-button"></button>
       <div class="add-good__error-img-wrapper"><img class="add-good__error-img" src="img/cross-red.svg" alt="красный крест"></div>
       <h2 class="add-good__error-title">Что-то пошло не так</h2>
     </div>
-    -->
-
-  </section>
+  </div>
+-->
   <section class="error">
     <button class="error__close-button"></button>
     <img class="error__img" src="img/cross-red.svg" alt="красный крест">

@@ -29,3 +29,6 @@ export const getPictureWindowPosition = (pictureWidth, pictureHeigth) => {
 
   return result;
 };
+
+export const getGoodId = (target, parentClassName) =>
+  target.closest(`.${parentClassName}`).childNodes[0].innerText;
