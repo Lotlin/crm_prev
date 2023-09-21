@@ -124,6 +124,20 @@ const renderLabelAddImg = () => {
   return label;
 };
 
+const imgPreviewWrapper = () => {
+  const wrapper = create.createImgPreviewWrapper();
+  const imgPreview = create.createImgPreview();
+  const delImgPreviewOverlay = create.createDelImgPreviewOverlay();
+  const delImgPreview = create.createDelImgPreview();
+
+  wrapper.append(imgPreview);
+  wrapper.append(delImgPreview);
+  wrapper.append(delImgPreviewOverlay);
+
+  return wrapper;
+};
+
+
 const renderForm = () => {
   const form = create.createAddGoodForm();
   const labelName = renderLabelName();
@@ -134,6 +148,8 @@ const renderForm = () => {
   const labelAmount = renderLabelAmount();
   const labelPrice = renderLabelPrice();
   const labelAddImg = renderLabelAddImg();
+  const messageImgSize = create.createMessageImgSize();
+  const imgPreviewWrap = imgPreviewWrapper();
 
   form.append(labelName);
   form.append(labelCategory);
@@ -143,6 +159,8 @@ const renderForm = () => {
   form.append(labelAmount);
   form.append(labelPrice);
   form.append(labelAddImg);
+  form.append(messageImgSize);
+  form.append(imgPreviewWrap);
 
   return form;
 };

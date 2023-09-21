@@ -354,3 +354,39 @@ export const createAddGoodButton = () => {
 
   return button;
 };
+
+export const createMessageImgSize = () => {
+  const h3 = document.createElement('h3');
+  h3.className = 'form__adding-good-error-img-size';
+  h3.textContent = 'Изображение не должно превышать размер 1 Мб';
+
+  return h3;
+};
+
+export const createImgPreviewWrapper = () => {
+  const wrapper = document.createElement('div');
+  wrapper.className = 'form__adding-good-img-wrap';
+
+  return wrapper;
+};
+
+export const createImgPreview = () => {
+  const img = document.createElement('img');
+  img.className = 'form__adding-good-img-preview';
+
+  return img;
+};
+
+export const createDelImgPreviewOverlay = () => {
+  const overlay = document.createElement('div');
+  overlay.className = `form__adding-good-img-preview-del-overlay`;
+
+  return overlay;
+};
+
+export const createDelImgPreview = () => {
+  const img = document.createElement('div');
+  img.className = 'form__adding-good-img-preview-del';
+
+  return img;
+};

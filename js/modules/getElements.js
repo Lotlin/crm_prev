@@ -45,6 +45,14 @@ export const getModalElements = () => {
   const count = overlay.querySelector('[name=amount]');
   const price = overlay.querySelector('[name=price]');
   const totalPrice = overlay.querySelector('.add-good__total-num');
+  const addImgInput = overlay.querySelector('.form__adding-good-input');
+  const previewImgWrapper =
+    overlay.querySelector('.form__adding-good-img-wrap');
+  const previewImg = overlay.querySelector('.form__adding-good-img-preview');
+  const priewImgDel =
+    overlay.querySelector('.form__adding-good-img-preview-del');
+  const messageErrPreviewSize =
+    overlay.querySelector('.form__adding-good-error-img-size');
 
   return {
     overlay,
@@ -60,5 +68,10 @@ export const getModalElements = () => {
     count,
     price,
     totalPrice,
+    addImgInput,
+    previewImgWrapper,
+    previewImg,
+    priewImgDel,
+    messageErrPreviewSize,
   };
 };

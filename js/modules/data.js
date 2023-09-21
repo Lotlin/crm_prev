@@ -7,3 +7,5 @@ export const getGoodDataUrl = `https://cyber-kindly-globeflower.glitch.me/api/go
 export const correctOrderOfProp = [
   'id', 'title', 'price', 'description', 'category', 'count', 'units', 'image',
 ];
+
+export const maxSizePriview = 1048576;

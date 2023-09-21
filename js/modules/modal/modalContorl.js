@@ -1,6 +1,7 @@
 import loadStyle from './styleLoad.js';
 import {renderAddGoodModal} from './renderModal.js';
 import {getModalElements, addBtn} from '../getElements.js';
+import {maxSizePriview} from '../data.js';
 
 export const openModal = (editGood = false) => {
   const modal = renderAddGoodModal(editGood);
@@ -14,9 +15,35 @@ export const closeModal = () => {
   closeModalButton.addEventListener('click', () => {
     overlay.remove();
   });
-
+  /*
   overlay.addEventListener('click', () => {
     overlay.remove();
+  });
+  */
+};
+
+const showAddGoodImgPreviewControl = async () => {
+  const fileInput = getModalElements().addImgInput;
+  const previewImg = getModalElements().previewImg;
+  const previewImgWrapper = getModalElements().previewImgWrapper;
+  const previewImgDel = getModalElements().priewImgDel;
+
+  fileInput.addEventListener('change', () => {
+    if (fileInput.files.length > 0) {
+      if (fileInput.files[0].size > maxSizePriview) {
+        const message = getModalElements().messageErrPreviewSize;
+        message.classList.add('form__adding-good-error-img-size--visible');
+        return true;
+      } else {
+        const src = URL.createObjectURL(fileInput.files[0]);
+        previewImg.src = src;
+        previewImgWrapper.classList.add('form__adding-good-img-wrap--visible');
+      }
+    }
+  });
+
+  previewImgDel.addEventListener('click', () => {
+    previewImgWrapper.classList.remove('form__adding-good-img-wrap--visible');
   });
 };
 
@@ -26,6 +53,7 @@ export const modalControl = async () => {
   addBtn.addEventListener('click', () => {
     openModal();
     closeModal();
+    showAddGoodImgPreviewControl();
   });
 };
 
