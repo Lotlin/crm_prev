@@ -80,10 +80,15 @@ export const createNewGood = (newGoodData) => {
   const units = newGoodData.units;
   const count = newGoodData.amount;
   const fullPrice = newGoodData.price;
+  let price = NaN;
   // discountSize пока не выводится (изменена форма)
-  const discountSize =
+  if (newGoodData.discountInput) {
+    const discountSize =
     getDiscountSize(fullPrice, newGoodData.discountInput);
-  const price = getDiscountedPrice(fullPrice, discountSize);
+    price = getDiscountedPrice(fullPrice, discountSize);
+  } else {
+    price = fullPrice;
+  }
   const description = newGoodData.description;
   // total пока не выводится (изменена форма)
   // const total = getTotalPrice(price, count);

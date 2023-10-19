@@ -59,6 +59,7 @@ export const createAddGoodLine = () => {
 export const createAddGoodForm = () => {
   const form = document.createElement('form');
   form.className = 'add-good__form form';
+  form.id = 'add-goodForm';
 
   return form;
 };
@@ -174,7 +175,6 @@ export const createAddGoodFormDiscountInputCheckbox = () => {
   input.setAttribute('type', 'checkbox');
   input.setAttribute('name', 'discountCheckbox');
   input.setAttribute('tabindex', '-1');
-  input.setAttribute('required', 'required');
 
   return input;
 };
@@ -195,7 +195,7 @@ export const createAddGoodFormDiscountInput = () => {
   input.setAttribute('max', '100');
   input.setAttribute('name', 'discountInput');
   input.setAttribute('tabindex', '-1');
-  input.setAttribute('required', 'required');
+  input.setAttribute('disabled', 'tue');
 
   return input;
 };
@@ -271,6 +271,7 @@ export const createAddGoodFormDescriptionTextarea = () => {
   textarea.setAttribute('name', 'description');
   textarea.setAttribute('tabindex', '-1');
   textarea.setAttribute('required', 'required');
+  textarea.setAttribute('minlength', 80);
 
   return textarea;
 };

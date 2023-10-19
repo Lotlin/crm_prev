@@ -2,6 +2,13 @@ import loadStyle from './styleLoad.js';
 import {renderAddGoodModal} from './renderModal.js';
 import {getModalElements, addBtn} from '../getElements.js';
 import {maxSizePriview} from '../data.js';
+import {
+  createNewGood,
+  // httpRequest,
+  showAllGoodsTotalPrice,
+} from '../serviceCRM.js';
+import {renderMainGoods} from '../render.js';
+// import {url} from '../data.js';
 
 export const openModal = (editGood = false) => {
   const modal = renderAddGoodModal(editGood);
@@ -15,11 +22,12 @@ export const closeModal = () => {
   closeModalButton.addEventListener('click', () => {
     overlay.remove();
   });
-  /*
-  overlay.addEventListener('click', () => {
-    overlay.remove();
+
+  overlay.addEventListener('click', (e) => {
+    if (e.target === overlay) {
+      overlay.remove();
+    }
   });
-  */
 };
 
 const showAddGoodImgPreviewControl = async () => {
@@ -47,13 +55,94 @@ const showAddGoodImgPreviewControl = async () => {
   });
 };
 
+const inputControl = (input, validChar = 'cyrillicSpace') => {
+  const validCharacters = {
+    'cyrillicSpace': /[^а-я\s]/ig,
+    'cyrillic': /[^а-я]/ig,
+    'numbers': /[^\d]/ig,
+  };
+
+  input.addEventListener('input', () => {
+    input.value = input.value.replace(validCharacters[validChar], '');
+  });
+};
+
+const modalInputControl = () => {
+  const titleInput = getModalElements().title;
+  const categoryInput = getModalElements().category;
+  const descriptionInput = getModalElements().description;
+  const units = getModalElements().units;
+  const count = getModalElements().count;
+  const discount = getModalElements().discount;
+  const price = getModalElements().price;
+
+  inputControl(titleInput);
+  inputControl(categoryInput);
+  inputControl(descriptionInput);
+  inputControl(units, 'cyrillic');
+  inputControl(count, 'numbers');
+  inputControl(discount, 'numbers');
+  inputControl(price, 'numbers');
+};
+
+const closeModalAfterNewGoodAdded = () => {
+  const overlay = getModalElements().overlay;
+  overlay.remove();
+};
+
+const formAddGoodsControl = () => {
+  const form = getModalElements().form;
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(e.target);
+    const newGoodData = Object.fromEntries(formData);
+
+    const newGood = createNewGood(newGoodData);
+
+    const addNewGoodMainTable = () => {
+      const newGoodArr = [newGood];
+      renderMainGoods(newGoodArr);
+      showAllGoodsTotalPrice();
+    };
+    // пока не добавляю в БД
+    /*
+    httpRequest(url, {
+      method: 'POST',
+      body: newGood,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    */
+    addNewGoodMainTable();
+    closeModalAfterNewGoodAdded();
+  });
+};
+
+const discountInputControl = () => {
+  const discountCheckbox = getModalElements().discountCheckbox;
+  discountCheckbox.addEventListener('change', () => {
+    const discountInput = getModalElements().discount;
+    if (discountCheckbox.checked) {
+      discountInput.removeAttribute('disabled');
+    } else {
+      discountInput.setAttribute('disabled', '');
+      discountInput.value = '';
+    }
+  });
+};
+
 export const modalControl = async () => {
   await loadStyle('/css/add-good.css');
 
   addBtn.addEventListener('click', () => {
     openModal();
-    closeModal();
     showAddGoodImgPreviewControl();
+    modalInputControl();
+    closeModal();
+    formAddGoodsControl();
+    discountInputControl();
   });
 };
 
